@@ -1,37 +1,34 @@
-import logo from "./logo.svg";
+import { useState } from "react";
+import List from "./components/List";
 import "./App.css";
 
 const App = () => {
+    const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+    const [newName, setNewName] = useState("");
+    const handlePersonChange = (event) => {};
+
     return (
-        <div className="App">
+        <div>
+            <h2>Phonebook</h2>
+            <form>
+                <div>
+                    name: <input />
+                </div>
+                <div>
+                    <button type="submit">add</button>
+                </div>
+            </form>
+            <h2>Numbers</h2>
             <div>
-                <h2>Phonebook</h2>
-                <form>
-                    <div>
-                        name: <input />
-                    </div>
-                    <div>
-                        <button type="submit">add</button>
-                    </div>
-                </form>
-                <h2>Numbers</h2>
-                ...
+              {persons.map(person => (
+                <List key={person.name} person={person}/>
+              ))}
+              {/* {persons.map(person => (
+                <p key={person.name}>{person.name}</p>
+              ))} */}
             </div>
-            
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <div>debug: {newName}</div>
+
         </div>
     );
 };
