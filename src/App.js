@@ -1,7 +1,9 @@
 import { useState } from "react";
-import List from "./components/List";
+import Filter from "./components/Filter";
+import Add from "./components/Add";
+import Person from "./components/Person";
+
 import "./App.css";
-import { getAllByLabelText, queryAllByAttribute } from "@testing-library/react";
 
 const App = () => {
     const [persons, setPersons] = useState([
@@ -53,33 +55,19 @@ const App = () => {
 
     return (
         <>
-            <h2>Phonebook</h2>
-            <div>
-                filter shown with{" "}
-                <input value={findPerson} onChange={handleFindPerson} />
-            </div>
+            <Filter
+                findPerson={findPerson}
+                handleFindPerson={handleFindPerson}
+            />
+            <Add
+                addList={addList}
+                newPerson={newPerson}
+                newNumber={newNumber}
+                handlePersonChange={handlePersonChange}
+                handleNumberChange={handleNumberChange}
+            />
 
-            <h2>Add a new</h2>
-            <form onSubmit={addList}>
-                <div>
-                    Name:{" "}
-                    <input value={newPerson} onChange={handlePersonChange} />
-                </div>
-                <div>
-                    Number:{" "}
-                    <input value={newNumber} onChange={handleNumberChange} />
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
-            <h2>Name and phone number</h2>
-            <div>
-                {personToShow.map((person) => (
-                    <List key={person.name} person={person} />
-                ))}
-            </div>
-            <div>debug: {newPerson}</div>
+            <Person personToShow={personToShow} />
         </>
     );
 };
